@@ -12,6 +12,9 @@ class MED:
     def get_source_dict(self):
         return self.__src_dict
 
+    def set_source_dict(self, new_list):
+        self.__src_dict = dict(new_list)     
+
     def set_source_word(self, word):
         self.__SOURCE_WORD = word 
 
@@ -35,14 +38,18 @@ class MED:
             word[index] = "#"
             dict['#'] = dict[letter]
             del dict[letter]
+
         elif letter in word and not first_delete:
-            print(dict)
-            print(dict[letter])
-            print(word)
+            # print(dict)
+            # print(dict)
+            # print(dict[letter])
+            # print(word)
             word[dict[letter]] = word[-1]
             word = word[:-1]
-            print(word)
-            print(dict)
+            new_list = [(data, index)for index, data in enumerate(word)]
+            # print(new_dict)
+            self.set_source_dict(new_list)
+            # print(dict)
             
 
              
@@ -78,8 +85,8 @@ if __name__ == "__main__":
     m = MED()
     print(m.get_src_word())
     m.replace('l','a', False)
-    # print(m.get_src_word())
-    # print(m.get_source_dict())
+    print(m.get_src_word())
+    print(m.get_source_dict())
     # m.replace('p', 's')
     # m.replace('l','t')
     # print(m.get_src_word())
