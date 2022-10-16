@@ -40,19 +40,10 @@ class MED:
             del dict[letter]
 
         elif letter in word and not first_delete:
-            # print(dict)
-            # print(dict)
-            # print(dict[letter])
-            # print(word)
             word[dict[letter]] = word[-1]
             word = word[:-1]
             new_list = [(data, index)for index, data in enumerate(word)]
-            # print(new_dict)
-            self.set_source_dict(new_list)
-            # print(dict)
-            
-
-             
+            self.set_source_dict(new_list)  
         word = ''.join(word)
         self.set_source_word(word)    
            
