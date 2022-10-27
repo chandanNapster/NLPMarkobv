@@ -43,7 +43,7 @@ class MED:
             word[dict[letter]] = word[-1]
             word = word[:-1]
             new_list = [(data, index)for index, data in enumerate(word)]
-            self.set_source_dict(new_list)  
+            self.set_source_dict(new_list)        
         word = ''.join(word)
         self.set_source_word(word)    
            
@@ -81,4 +81,4 @@ if __name__ == "__main__":
     # m.replace('p', 's')
     # m.replace('l','t')
     # print(m.get_src_word())
-    
+       

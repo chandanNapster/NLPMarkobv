@@ -87,5 +87,8 @@ def delete(word, letter, dict):
 
     return ''.join(word)     
 
+def insert(word, letter, dict):
+    word = list(word)
+    index = dict[' ']
 
-print(delete(delete(word_1, 'a', dict_word_1), 'p', dict_word_1))
+# print(delete(delete(word_1, 'a', dict_word_1), 'p', dict_word_1))
