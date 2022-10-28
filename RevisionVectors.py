@@ -17,9 +17,12 @@ def unitVector(vector):
 
 def find_orthogonal_vector(vector):
     orthogonal_vectors = 0
-    while(not(89.99999999999< orthogonal_vectors < 90.000000001)):
+    count = 0
+    while(not(89.9999< orthogonal_vectors < 90.0001)):
         ortho_vec = np.round(np.random.randn(4) * 10)
         orthogonal_vectors = angle_btw_vectors(vector,ortho_vec)
+        count += 1
+    print(count)    
     return ortho_vec
 
 
@@ -49,4 +52,8 @@ if __name__ == '__main__':
     print(angle_btw_vectors(a,find_orthogonal_vector(a)))
     print("ORTHOGINAL VECTOR TO {0} IS {1}".format(b,find_orthogonal_vector(b)))
     print(angle_btw_vectors(b,find_orthogonal_vector(b)))
+    print("ORTHOGINAL VECTOR TO {0} IS {1}".format(unit_a, unitVector(find_orthogonal_vector(unit_a))))
+    print(angle_btw_vectors(unit_a,unitVector(find_orthogonal_vector(unit_a))))
+    print("ORTHOGINAL VECTOR TO {0} IS {1}".format(unit_b, unitVector(find_orthogonal_vector(unit_b))))
+    print(angle_btw_vectors(unit_b,unitVector(find_orthogonal_vector(unit_b))))
         
