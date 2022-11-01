@@ -1,8 +1,8 @@
 import numpy as np
 
-Common = np.random.randint(2,7)
-Outer1 = np.random.randint(2,7)
-Outer2 = np.random.randint(2,7)
+Common = np.random.randint(2,3)
+Outer1 = np.random.randint(2,3)
+Outer2 = np.random.randint(2,3)
 
 print(Common, Outer1, Outer2)
 
