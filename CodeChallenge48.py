@@ -23,45 +23,34 @@ def orthoVector(vector):
         angle = np.rad2deg(angle_between_vectors(orthoVec, vector))
     return orthoVec
 
+def showPlot(x,y):
+    # Scatter plot with day against tip
+    plt.plot(x)
+    plt.plot(y)
+ 
+    # Adding Title to the Plot
+    plt.title("Scatter Plot")
+ 
+    # Setting the X and Y labels
+    plt.xlabel('Orthogonal Vector')
+    plt.ylabel('Nprmal Vector')
+ 
+    plt.show()
+
 
 if __name__ == '__main__':
-
+    multi_factor = 1.5
     angle = 0
     len_of_o_vec = []
     len_of_vec = []
     while angle != 360:
-    
         deg = np.deg2rad(angle)
         thetha = deg
-        
-        rot_mat = np.array([[4*np.cos(thetha), -np.sin(thetha)],[np.sin(thetha), np.cos(thetha)]])
+        rot_mat = np.array([[(multi_factor*np.cos(thetha)), -np.sin(thetha)],[np.sin(thetha),  np.cos(thetha)]])
         vec2 = np.array(vec1)
-        print('The angle is-->', angle)
-        # print(rot_mat)
-        # print(vec1)
-
         o_Vec = vec2 @ rot_mat
-        # print('')
-        # print(length_of_vector(o_Vec))
-        # print(length_of_vector(vec2))
-        print('ratio -->', length_of_vector(o_Vec)/length_of_vector(vec2))
-        print('################')
-        len_of_o_vec.append(length_of_vector(o_Vec * 10))
+        len_of_o_vec.append(length_of_vector(o_Vec))
         len_of_vec.append(length_of_vector(vec2))
         angle += 1 
 
-  
-    # print(np.rad2deg(angle_between_vectors(o_Vec, vec1)))
-
-    # orth_vec = orthoVector(vec1)
-
-    # print('Othro')
-    # print(orth_vec)
-
-
-    # print(vec2.T @ rot_mat)
-
-    # print(orthoVector(vec1))
-    # print(np.rad2deg(angle_between_vectors(vec1, orthoVector(vec1))))
-
-    # angle_between_vectors(vec1, vec1)
+    showPlot(len_of_o_vec, len_of_vec)
