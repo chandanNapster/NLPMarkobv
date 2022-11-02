@@ -7,7 +7,7 @@ theta = np.linspace( 0 , 2 * np.pi , 100 )
 radius = 0.4
 x,y = np.array(radius * np.cos( theta )), np.array(radius * np.sin( theta ))
 
-nx,ny = np.array(radius * np.cos( theta )), np.array(radius * np.sin( theta ))
+# nx,ny = np.array(radius * np.cos( theta )), np.array(radius * np.sin( theta ))
 
 circle_mat = np.array([x,y])
 # rotation_mat = np.identity(2) *2
