@@ -9,7 +9,8 @@ x,y = np.array(radius * np.cos( theta )), np.array(radius * np.sin( theta ))
 
 # nx,ny = np.array(radius * np.cos( theta )), np.array(radius * np.sin( theta ))
 
-circle_mat = np.array([x,y])
+# circle_mat = np.array([x,y])
+circle_mat = np.vstack((np.array(radius * np.cos( theta )), np.array(radius * np.sin( theta ))))
 # rotation_mat = np.identity(2) *2
 multi_factor = 4
 angle = 30

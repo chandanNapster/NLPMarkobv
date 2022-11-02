@@ -36,13 +36,13 @@ for i in range(rows):
 
 def marMul(matrix, rng):
     for i in range(rng):
-        matrix = matrix @ matrix
+        matrix = np.multiply(matrix,matrix)
     return matrix
 
 
 # print(marMul(state_matrix, 52))
 
-var = marMul(state_matrix, 52)
+var = marMul(state_matrix, 3)
 
 print(var)
 print(np.sum(var[0]))
