@@ -27,14 +27,11 @@ def showPlot(x,y):
     # Scatter plot with day against tip
     plt.plot(x)
     plt.plot(y)
- 
     # Adding Title to the Plot
     plt.title("Scatter Plot")
- 
     # Setting the X and Y labels
     plt.xlabel('Orthogonal Vector')
     plt.ylabel('Nprmal Vector')
- 
     plt.show()
 
 
