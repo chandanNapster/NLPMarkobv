@@ -1,0 +1,117 @@
+import numpy as np 
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+from scipy.stats import pearsonr 
+
+num_rows = 14
+
+file = "D:\\NLPMarkov\\NLPMarkobv\\Burndown.csv"
+data = pd.read_csv(file)
+
+days = list(data['Days'])
+estimated = list(data['Estimated'])
+actual = list(data['Actual'])
+
+data_preproc = pd.DataFrame({
+    'DAYS': days, 
+    'ESTIMATED': estimated,
+    'ACTUAL': actual})
+
+
+def showLinePlot():
+    ax = sns.lineplot(x='DAYS', y='value', hue='variable', data=pd.melt(data_preproc, ['DAYS']))    
+    ax.set(ylabel='User Story Points', xlabel='Number of Days')
+    plt.show()     
+
+
+def showJointPlot(val1,val2,choice):
+    # kind{ “scatter” | “kde” | “hist” | “hex” | “reg” | “resid” }
+    knd = kind_type(choice)
+    if choice == 4:
+        r_value, angle = corr(val1, val2)
+        if 1 > r_value > .9:
+            print("Very High Positive Correlation = {0} and angle between two vectors is = {1} degrees".format(r_value, angle))
+        elif .9 > r_value > .7:
+            print("High Positive Correlation = {0} and angle between two vectors is = {1} degrees".format(r_value, angle))
+        elif .7 > r_value > .5:
+            print("Moderate Positive Correlation = {0} and angle between two vectors is = {1} degrees".format(r_value, angle))
+        elif .5 > r_value > .3:
+            print("Weak Positive Correlation = {0} and angle between two vectors is = {1} degrees".format(r_value, angle))    
+        elif .3 > r_value > -.3:
+            print("Negligible Correlation = {0} and angle between two vectors is = {1} degrees".format(r_value, angle))
+        elif -.3 > r_value > -.5:
+            print("Weak Negative Correlation = {0} and angle between two vectors is = {1} degrees".format(r_value, angle)) 
+        elif -.5 > r_value > -.7:
+            print("Moderate Negative Correlation = {0} and angle between two vectors is = {1} degrees".format(r_value, angle))
+        elif -.7 > r_value > -.9:
+            print("High Negative Correlation = {0} and angle between two vectors is = {1} degrees".format(r_value, angle))
+        elif -.9 > r_value > -1:
+            print("Very High Negative Correlation = {0} and angle between two vectors is = {1} degrees".format(r_value, angle))
+                   
+        sns.jointplot(data=data_preproc, x=val1, y=val2, kind=knd)
+        
+    else:
+        sns.jointplot(data=data_preproc, x=val1, y=val2, kind=knd)
+
+    plt.show()
+
+def kind_type(argument):
+    match argument:
+        case 0:
+            return "scatter"
+        case 1:
+            return "kde"
+        case 2:
+            return "hist"
+        case 3:
+            return "hex"
+        case 4:
+            return "reg"        
+        case 5:
+            return "resid"
+
+def unit_vec(vector):
+    vector = np.array(vector)
+    mag = np.linalg.norm(vector)
+    vector = vector * (1/mag)
+    return vector            
+
+def corr(vec1, vec2):
+    vec1 = np.array(vec1)
+    vec2 = np.array(vec2)
+    avg_vec1 = np.average(vec1)
+    avg_vec2 = np.average(vec2)
+    vec1 = vec1 - avg_vec1
+    vec2 = vec2 - avg_vec2
+    r_value = np.dot(vec1, vec2)/ (np.linalg.norm(vec1) * np.linalg.norm(vec2))
+    theta = np.arccos(r_value)
+    theta = np.rad2deg(theta)
+    return r_value, theta
+
+
+
+
+if __name__ == "__main__":
+    # showLinePlot() 
+    choice = 4
+    # showLinePlot()
+
+    print(actual)
+    showJointPlot(days,actual, choice)
+
+    # avg_day = np.average(days)
+    # avg_actual = np.average(actual)
+    # r,a = corr(days, actual)
+
+    # print(r, a)
+    corr, _ = pearsonr(days, actual)
+    print(corr)
+    # v1 = np.array([5,0])
+    # v2 = np.array([-4,3])
+    # r_value, angle = corr(v1, v2)
+    # print(r_value, angle)
+    # print("##################")
+    # r_value, angle = corr(estimated, actual)
+
+    # print(r_value, angle)

@@ -70,18 +70,23 @@ if __name__ == '__main__':
     # print(mat_asym_index(A))
     # print(mat_asym_index(A @ A))    
     # print(mat_asym_index(A @ A @ A))  
-    mat = create_X_percent_symmetric_matrix(82)
-    sk_mat = create_a_skew_symmetric_matrix(mat)
+    mat = create_X_percent_symmetric_matrix(80)
+    # sk_mat = create_a_skew_symmetric_matrix(mat)
+    # print(mat)
+    # print(sk_mat)
+    # print(mat_sym_index(mat))
+    # print(1- mat_sym_index(sk_mat))
+
+    # new_mat = mat + sk_mat
+    # print(mat_sym_index(new_mat))
+    print('######################')
     print(mat)
-    print(sk_mat)
     print(mat_sym_index(mat))
-    print(1- mat_sym_index(sk_mat))
+    print('######################')
 
-    new_mat = mat + sk_mat
-    print(mat_sym_index(new_mat))
-
-    new_mat_v2 = create_X_percent_symmetric_matrix_v2(78, A)
+    new_mat_v2 = create_X_percent_symmetric_matrix_v2(80, mat)
 
     print(new_mat_v2)
 
     print(mat_sym_index(new_mat_v2))
+    print('######################')
