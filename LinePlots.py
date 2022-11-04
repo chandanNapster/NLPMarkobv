@@ -48,11 +48,25 @@ def showJointPlot(val1,val2,choice):
             print("High Negative Correlation = {0} and angle between two vectors is = {1} degrees".format(r_value, angle))
         elif -.9 > r_value > -1:
             print("Very High Negative Correlation = {0} and angle between two vectors is = {1} degrees".format(r_value, angle))
-                   
-        sns.jointplot(data=data_preproc, x=val1, y=val2, kind=knd)
+
+        if val1 == actual:           
+            sns.jointplot(data=data_preproc, x='ACTUAL', y='ESTIMATED', kind=knd)
+        elif val1 == estimated:
+            sns.jointplot(data=data_preproc, x='ESTIMATED', y='ACTUAL', kind=knd)
+        elif val1 == days and val2 == actual:
+            sns.jointplot(data=data_preproc, x='DAYS', y='ACTUAL', kind=knd)
+        elif val1 == days and val2 == estimated:
+            sns.jointplot(data=data_preproc, x='DAYS', y='ESTIMATED', kind=knd)
         
     else:
-        sns.jointplot(data=data_preproc, x=val1, y=val2, kind=knd)
+        if val1 == actual:           
+            sns.jointplot(data=data_preproc, x='ACTUAL', y='ESTIMATED', kind=knd)
+        elif val1 == estimated:
+            sns.jointplot(data=data_preproc, x='ESTIMATED', y='ACTUAL', kind=knd)
+        elif val1 == days and val2 == actual:
+            sns.jointplot(data=data_preproc, x='DAYS', y='ACTUAL', kind=knd)
+        elif val1 == days and val2 == estimated:
+            sns.jointplot(data=data_preproc, x='DAYS', y='ESTIMATED', kind=knd)
 
     plt.show()
 
@@ -84,34 +98,28 @@ def corr(vec1, vec2):
     avg_vec2 = np.average(vec2)
     vec1 = vec1 - avg_vec1
     vec2 = vec2 - avg_vec2
-    r_value = np.dot(vec1, vec2)/ (np.linalg.norm(vec1) * np.linalg.norm(vec2))
+    r_value = np.dot(vec1, vec2) / (np.linalg.norm(vec1) * np.linalg.norm(vec2))
     theta = np.arccos(r_value)
     theta = np.rad2deg(theta)
     return r_value, theta
 
 
-
-
 if __name__ == "__main__":
     # showLinePlot() 
-    choice = 4
-    # showLinePlot()
+    plot_type_choice = 4
+    plot_between_choices = 2
 
-    print(actual)
-    showJointPlot(days,actual, choice)
+    if plot_between_choices == 0:
+        parameter1, parameter2 = days, actual
+    elif plot_between_choices == 1:
+        parameter1, parameter2 = days, estimated    
+    elif plot_between_choices == 2:
+        parameter1, parameter2 = estimated, actual
+    elif plot_between_choices == 3:
+        parameter1, parameter2 = actual, estimated        
 
-    # avg_day = np.average(days)
-    # avg_actual = np.average(actual)
-    # r,a = corr(days, actual)
-
-    # print(r, a)
-    corr, _ = pearsonr(days, actual)
+    showLinePlot()
+    showJointPlot(parameter1,parameter2, plot_type_choice)
+    corr, _ = pearsonr(parameter1, parameter2)
     print(corr)
-    # v1 = np.array([5,0])
-    # v2 = np.array([-4,3])
-    # r_value, angle = corr(v1, v2)
-    # print(r_value, angle)
-    # print("##################")
-    # r_value, angle = corr(estimated, actual)
-
-    # print(r_value, angle)
+    
