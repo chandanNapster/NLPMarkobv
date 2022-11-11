@@ -13,7 +13,8 @@ class Fitness():
     def getChromosome(self):
         indiv = Individual(self.getProductList())
         return indiv.getChromosome() 
-
+    
+    
     def getFitness(self, chromosome):
         total_score, space_sum = 0,0
         prod_list = self.getProductList()
@@ -33,20 +34,20 @@ class Fitness():
         return chromo, total, space
 
 
-# if __name__ == "__main__":
-#     prod_list = []
-#     prd_list = m.getData()
-#     fit = Fitness(prd_list)
+if __name__ == "__main__":
+    prod_list = []
+    prd_list = m.getData()
+    fit = Fitness(prd_list)
 
-#     parent_list = []
-#     for i in range(2):
-#         c,t,s = fit.getBestChromosome()
-#         parent_list.append(c)
-#         # print(t,s)
-#         # print(c)  
+    parent_list = []
+    for i in range(2):
+        c,t,s = fit.getBestChromosome()
+        parent_list.append(c)
+        # print(t,s)
+        # print(c)  
 
-#     for item in parent_list:
-#         print(item)
+    for item in parent_list:
+        print(item)
 
         
 
