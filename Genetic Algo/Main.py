@@ -3,7 +3,7 @@ from Product import product as product
 
 class main():
 
-    def getData():
+    def getData(self):
         p1 = product("Refrigerator A", 999.90, 0.751)
         p2 = product("Cell phone", 2199.12, 0.00000899)
         p3 = product("TV 55`", 4346.99, 0.400)
@@ -36,3 +36,8 @@ class main():
         prods.setProdList(p14)
 
         return prods.getProdList()
+
+if __name__ == "__main__":
+    m = main()
+    for items in m.getData():
+        print(items)        
