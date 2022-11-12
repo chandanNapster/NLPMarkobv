@@ -1,5 +1,4 @@
 from Fitness import Fitness
-from Main import main as m
 from IndividualV1 import Individual
 import numpy as np
 
