@@ -2,6 +2,7 @@ from Population import Population
 from Fitness import Fitness
 import numpy as np
 from Individual import Individual
+from Main import main 
 
 class GeneticAlgorithm():
 
@@ -112,9 +113,14 @@ class GeneticAlgorithm():
             index += 1
         return chromosome    
 
-
+    def best_individual_in_gen(self,population, generation):
+        sortedIndividual = sorted(population, key = lambda x : x.getTotalPrice(), reverse=True)
+        bestIndividual = sortedIndividual[0]
+        bestIndividual.generation = generation
+        # print('Chromosome-->',bestIndividual.chromosome,'\n', 'Total Price-->', bestIndividual.getTotalPrice(),'\n','Total Space-->',bestIndividual.getTotalSpace(),'\n','Gen -->', generation)         
+        return bestIndividual, generation
 if __name__ == "__main__":
-    p_Obj = Population(20)
+    p_Obj = Population(10)
     p_Obj.get_fit_population()
     population = p_Obj.population 
     # population = p_Obj.population
@@ -126,12 +132,14 @@ if __name__ == "__main__":
     
     
 
-    for i in population:
-        print(i)    
+    # for i in population:
+    #     print(i)  
+
+    best_solutions_per_generation = []      
 
     print("***********************START OF GA*******************************************")
-    while not (p_Obj.generation == 50) and len(population) != 0:
-        print("############################ WELCOME GEN {0}#####################################".format(p_Obj.generation))
+    while not (p_Obj.generation == 25) and len(population) != 0:
+        # print("############################ WELCOME GEN {0}#####################################".format(p_Obj.generation))
         ga = GeneticAlgorithm(population)
         parentPopulation = ga.selectParent()
         offspringChromosomes = ga.crossOverPopulation(parentPopulation)
@@ -143,19 +151,38 @@ if __name__ == "__main__":
 
         # print("_________________________________________________________________________________")
         fit_population = Fitness(mutated_Offsprings_population).getFitness()
-        for indi in fit_population:
-            print(indi)   
+        # for indi in fit_population:
+        #     print(indi)   
 
         population = fit_population
+        best_individual, generation = ga.best_individual_in_gen(population, p_Obj.generation)
 
-        print("#######################END OF GEN ={0} THE TOTAL INDIVIDUALS = {1}###############".format(p_Obj.generation, len(population)))
-        print("")
+        best_solutions_per_generation.append(best_individual)
+
+        # print("#######################END OF GEN ={0} THE TOTAL INDIVIDUALS = {1}###############".format(p_Obj.generation, len(population)))
+        # print("")
 
 
-    bestSolution = sorted(population, key = lambda x : x.getTotalPrice(), reverse=True) 
+    best_solutions_per_generation = sorted(best_solutions_per_generation, key = lambda x : x.getTotalPrice() and x.getTotalSpace(), reverse=True)   
 
-    for i in bestSolution:
-        print(i)
+    # for individual in best_solutions_per_generation:
+    #     print(individual, individual.generation)
+
+    best_solution_after_GA = best_solutions_per_generation[0]
+
+    print(best_solution_after_GA, best_solution_after_GA.generation)
+
+    print("**************** BEST SOLUTION *****************************") 
+    product_list = Individual.product_list
+
+    for i in range(len(product_list)):
+        if best_solution_after_GA.chromosome[i] == 1:
+            print(product_list[i])
+
+    # bestSolution = sorted(population, key = lambda x : x.getTotalPrice(), reverse=True) 
+
+    # for i in bestSolution:
+    #     print(i)
 
     # for parents in parentPopulation:
     #     p1, p2 = parents

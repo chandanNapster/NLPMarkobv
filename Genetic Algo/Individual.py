@@ -5,11 +5,14 @@ class Individual():
     m = main()
     product_list = m.getData()
     
-    def __init__(self, chromosome = None):
+    def __init__(self, chromosome = None, gen = None):
         if chromosome == None:
             self.chromosome = []
             self.__set_chromosome()
         else: self.chromosome = chromosome
+
+        if gen != None: self.generation = gen 
+
 
     def __set_chromosome(self):
         for i in range(len(Individual.product_list)):
