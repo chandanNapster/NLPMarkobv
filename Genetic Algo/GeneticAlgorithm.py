@@ -119,6 +119,8 @@ class GeneticAlgorithm():
         bestIndividual.generation = generation
         # print('Chromosome-->',bestIndividual.chromosome,'\n', 'Total Price-->', bestIndividual.getTotalPrice(),'\n','Total Space-->',bestIndividual.getTotalSpace(),'\n','Gen -->', generation)         
         return bestIndividual, generation
+
+
 if __name__ == "__main__":
     p_Obj = Population(10)
     p_Obj.get_fit_population()
@@ -163,7 +165,7 @@ if __name__ == "__main__":
         # print("")
 
 
-    best_solutions_per_generation = sorted(best_solutions_per_generation, key = lambda x : x.getTotalPrice() and x.getTotalSpace(), reverse=True)   
+    best_solutions_per_generation = sorted(best_solutions_per_generation, key = lambda x : x.getTotalPrice(), reverse=True)   
 
     # for individual in best_solutions_per_generation:
     #     print(individual, individual.generation)

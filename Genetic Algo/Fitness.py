@@ -7,7 +7,7 @@ class Fitness():
 
     def getFitness(self):
         for individual in self.__population:
-            if 2.91 < individual.getTotalSpace() < 3.0:
+            if 2.9 < individual.getTotalSpace() < 3.0:
                 self.__fitPopulation.append(individual) 
         return self.__fitPopulation       
 
